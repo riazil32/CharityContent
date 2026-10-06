@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --color-ink: #1b2420;
+  --color-muted: #5d6863;
+  --color-cream: #faf7f2;
+  --color-sand: #ece5da;
+  --color-sand-dark: #ddd3c4;
+
+  --color-brand-50: #eef6f3;
+  --color-brand-100: #d6eae2;
+  --color-brand-200: #acd4c5;
+  --color-brand-300: #78b7a1;
+  --color-brand-400: #4b967e;
+  --color-brand-500: #2f7a64;
+  --color-brand-600: #236352;
+  --color-brand-700: #1d5044;
+  --color-brand-800: #1a4138;
+  --color-brand-900: #15352e;
+  --color-brand-950: #0b1f1a;
+
+  --color-coral-50: #fdf3ee;
+  --color-coral-100: #fbe3d6;
+  --color-coral-200: #f6c5ad;
+  --color-coral-400: #e98d66;
+  --color-coral-500: #df7449;
+  --color-coral-600: #c65d34;
+  --color-coral-700: #a3492a;
+
+  --shadow-card: 0 1px 2px rgb(27 36 32 / 0.04), 0 4px 16px -4px rgb(27 36 32 / 0.06);
+  --shadow-lift: 0 2px 4px rgb(27 36 32 / 0.04), 0 12px 32px -8px rgb(27 36 32 / 0.12);
+
+  --animate-fade-up: fade-up 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-pop: pop 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pop {
+    from { opacity: 0; transform: scale(0.97) translateY(6px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-cream text-ink font-sans;
+  }
+  ::selection {
+    @apply bg-brand-200 text-brand-950;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Thin, quiet scrollbars inside panels */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-sand-dark) transparent;
+}
