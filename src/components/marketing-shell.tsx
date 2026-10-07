@@ -25,14 +25,14 @@ export function MarketingShell({ children }: { children: ReactNode }) {
       <header className="sticky top-0 z-40 border-b border-sand/70 bg-cream/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Logo />
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-1 lg:flex">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-ink">
                 {n.label}
               </Link>
             ))}
           </nav>
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             {signedIn ? (
               <ButtonLink href="/dashboard">Go to dashboard</ButtonLink>
             ) : (
@@ -44,12 +44,12 @@ export function MarketingShell({ children }: { children: ReactNode }) {
               </>
             )}
           </div>
-          <button className="rounded-lg p-2 md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
+          <button className="rounded-lg p-2 lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
         {open && (
-          <div className="animate-fade-in border-t border-sand bg-cream px-4 pt-2 pb-4 md:hidden">
+          <div className="animate-fade-in border-t border-sand bg-cream px-4 pt-2 pb-4 lg:hidden">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="block rounded-lg px-2 py-2.5 text-[15px] font-medium">
                 {n.label}
