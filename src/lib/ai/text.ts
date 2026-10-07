@@ -78,7 +78,12 @@ export function stripEmoji(text: string): string {
 }
 
 export function sentences(text: string): string[] {
-  return text.match(/[^.!?\n]+[.!?]+["')]*|[^.!?\n]+$/g)?.map((s) => s.trim()).filter(Boolean) ?? [];
+  // A sentence ends at . ! or ? followed by a space or line break, so web
+  // addresses ("hopebridgetrust.org.uk") and amounts ("£2.50") stay whole.
+  return text
+    .split(/(?<=[.!?]["')]*)\s+|\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
 }
 
 export function formatLongDate(iso: string): string {

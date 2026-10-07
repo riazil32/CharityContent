@@ -448,7 +448,8 @@ function assemble(parts: Parts, v: Vars, input: GenerateInput, rng: Rng): Conten
   let body = [...shaped.body];
   if (contentType !== "newsletter") {
     const opener = pick(rng, TONE_OPENERS[tone]);
-    if (opener) body = [opener, ...body];
+    // An opener would break a first line that points back at the headline ("That's what one young person told us...").
+    if (opener && !refersToHeadline(body[0])) body = [opener, ...body];
     if (platform !== "x") body.push(pick(rng, TONE_CLOSERS[tone]));
   }
   if (v.brief) body.splice(Math.min(2, body.length), 0, ensureSentence(v.brief));
@@ -503,6 +504,16 @@ const ENGAGING_QUESTIONS = [
   "Tag someone who'd want to see this.",
 ];
 
+const ALL_TONE_OPENERS = Object.values(TONE_OPENERS).flat().filter(Boolean);
+
+// "What a week..." and "Why we care..." are not questions: a question word only counts when a verb follows it.
+const QUESTION_START =
+  /^((why|how|what|who|where|when) (is|are|was|were|does|do|did|would|will|can|could|should|has|have|makes?)|did you|have you|could you|got (a|an|some))\b/i;
+
+function refersToHeadline(line: string | undefined): boolean {
+  return /^(that's|that is|this is|these are)\b/i.test(stripEmoji(line ?? "").trim());
+}
+
 export function refineWithTemplates(draft: ContentDraft, refinement: Refinement, platform: Platform, seed = Date.now()): ContentDraft {
   const rng = createRng(seed);
   const paragraphs = draft.caption.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
@@ -538,7 +549,9 @@ export function refineWithTemplates(draft: ContentDraft, refinement: Refinement,
     case "emotional": {
       const opener = pick(rng, EMOTIONAL_OPENERS);
       const closer = pick(rng, EMOTIONAL_CLOSERS);
-      const body = [opener, ...paragraphs.filter((p) => !EMOTIONAL_OPENERS.includes(p))];
+      // Swap any existing tone opener ("Hello lovely people!") for the emotional one.
+      const rest = paragraphs.filter((p) => !EMOTIONAL_OPENERS.includes(p) && !ALL_TONE_OPENERS.includes(p));
+      const body = rest.length && refersToHeadline(rest[0]) ? [rest[0], opener, ...rest.slice(1)] : [opener, ...rest];
       if (!body.includes(closer)) body.push(closer);
       return {
         ...draft,
@@ -552,7 +565,7 @@ export function refineWithTemplates(draft: ContentDraft, refinement: Refinement,
       if (!body.some((p) => ENGAGING_QUESTIONS.includes(p))) body.push(question);
       return {
         ...draft,
-        headline: /^(why|what|how|did|could|have|got)/i.test(stripEmoji(draft.headline).trim())
+        headline: QUESTION_START.test(stripEmoji(draft.headline).trim())
           ? hook
           : `${stripTrailingPunctuation(draft.headline)}: here's how you can help`,
         caption: body.join(platform === "x" ? " " : "\n\n"),
