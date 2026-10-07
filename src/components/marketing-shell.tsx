@@ -6,6 +6,7 @@ import { useState, type ReactNode } from "react";
 import { Logo } from "./brand";
 import { ButtonLink } from "./ui";
 import { useApp } from "./app-provider";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 const NAV = [
   { href: "/#how-it-works", label: "How it works" },
@@ -83,7 +84,7 @@ export function MarketingShell({ children }: { children: ReactNode }) {
           </div>
           <FooterCol title="Product" links={[["How it works", "/#how-it-works"], ["Features", "/#features"], ["Pricing", "/pricing"]]} />
           <FooterCol title="Account" links={[["Log in", "/login"], ["Sign up", "/signup"], ["Dashboard", "/dashboard"]]} />
-          <FooterCol title="Company" links={[["FAQ", "/#faq"], ["Contact", "mailto:hello@charitycontent.co.uk"]]} />
+          <FooterCol title="Company" links={[["FAQ", "/#faq"], ["Contact", `mailto:${CONTACT_EMAIL}`], ["Privacy policy", "/privacy"], ["Terms of use", "/terms"]]} />
         </div>
         <div className="border-t border-sand">
           <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-muted sm:px-6">
