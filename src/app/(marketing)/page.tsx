@@ -84,7 +84,7 @@ const FAQS = [
   },
   {
     q: "Is our information kept private?",
-    a: "Your organisation profile and content are only visible to your account. We never sell your data, and you can delete your account at any time.",
+    a: "Your organisation profile and content are only visible to your account. We never sell your data, and if you ever want your account deleted, just email us and we will remove everything.",
   },
   {
     q: "Can we cancel at any time?",

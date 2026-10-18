@@ -75,7 +75,15 @@ function SignupForm() {
           Create account
         </Button>
         <p className="text-center text-xs leading-relaxed text-muted">
-          By creating an account you agree to our terms and privacy policy.
+          By creating an account you agree to our{" "}
+          <Link href="/terms" className="underline underline-offset-2 hover:text-ink">
+            terms
+          </Link>{" "}
+          and{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-ink">
+            privacy policy
+          </Link>
+          .
           {mode === "demo" && " Demo mode: your account is stored in this browser only."}
         </p>
       </form>

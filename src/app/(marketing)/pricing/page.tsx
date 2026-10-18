@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Check, X } from "lucide-react";
 import { PricingCards } from "@/components/pricing-cards";
+import { CONTACT_EMAIL } from "@/lib/site";
 
 export const metadata: Metadata = { title: "Pricing" };
 
@@ -59,7 +60,7 @@ export default function PricingPage() {
         </div>
         <p className="mt-6 text-center text-sm text-muted">
           Prices exclude VAT. Registered charities may be eligible for VAT relief. Need something bigger?{" "}
-          <a className="font-medium text-brand-700 underline underline-offset-4" href="mailto:hello@charitycontent.co.uk">
+          <a className="font-medium text-brand-700 underline underline-offset-4" href={`mailto:${CONTACT_EMAIL}`}>
             Talk to us
           </a>
           .
