@@ -161,7 +161,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {menuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 animate-fade-in bg-brand-950/30" onClick={() => setMenuOpen(false)} />
-          <div className="absolute inset-y-0 right-0 flex w-[min(320px,85vw)] animate-fade-in flex-col bg-white px-4 py-4 shadow-lift">
+          <div className="absolute inset-y-0 right-0 flex w-[min(320px,85vw)] animate-fade-in flex-col bg-white px-4 pt-4 pb-20 shadow-lift">
             <div className="mb-6 flex items-center justify-between">
               <p className="px-2 text-sm font-semibold text-muted">Menu</p>
               <button onClick={() => setMenuOpen(false)} className="rounded-lg p-2" aria-label="Close menu">

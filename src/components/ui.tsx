@@ -287,11 +287,11 @@ export function Modal({
 
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true">
+    <div className="fixed inset-0 z-50 flex items-end justify-center pb-20 sm:items-center sm:p-6 sm:pb-20" role="dialog" aria-modal="true">
       <div className="absolute inset-0 animate-fade-in bg-brand-950/30 backdrop-blur-[2px]" onClick={onClose} />
       <div
         className={clsx(
-          "relative flex max-h-[92vh] w-full animate-pop flex-col overflow-hidden rounded-t-3xl bg-white shadow-lift sm:rounded-3xl",
+          "relative flex max-h-[calc(100dvh-6rem)] w-full animate-pop flex-col overflow-hidden rounded-3xl bg-white shadow-lift",
           size === "md" && "sm:max-w-lg",
           size === "lg" && "sm:max-w-2xl",
           size === "xl" && "sm:max-w-4xl",

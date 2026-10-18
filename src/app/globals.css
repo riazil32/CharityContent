@@ -59,6 +59,9 @@
   }
   body {
     @apply bg-cream text-ink font-sans;
+    /* Netlify's free plan pins a "Powered by Netlify" badge to the bottom right
+       of every page. Leave room for it so it never covers buttons. */
+    padding-bottom: 4.5rem;
   }
   ::selection {
     @apply bg-brand-200 text-brand-950;
